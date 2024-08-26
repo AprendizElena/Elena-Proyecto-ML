@@ -1,2 +1,6 @@
 # Elena-Proyecto-ML
-Análisis sobre los rasgos de la gente más inteligente del mundo
+Mi proyecto se enfoca en un pequeño análisis sobre las tendencias de los precios en los coches de la marca Nissan en este caso.
+He utilizado un dataset sencillo de la fuente www.kaggle.com ,que dispone de suficiente información útil sobre las caracteristicas de los modelos de coches marca Nissan y también sobre los propietarios.Estamos hablando de datos demográficos ,de datos sobre la evaluación del mercado actual y rendimiento de los coches.He podido descubrir que es  el estado del coche lo que más influye en el precio final junto al rendimiento,aunque he podido notar también una importante influencia en cuanto a los km totales de conducción en el caso de cada modelo de coche. 
+El dataset me dio bastantes problemas para trabajarlo al principio , porque estaba lleno de valores faltantes (null) y tuve que rellenar esos datos con la media , ya que es el valor más cercano al resto de valores implicadosy eliminar otros valores.
+He utilizado modelos de entrenamiento con la Linear Regression, también con Decision Tree Regressor, con Random Forest y por último he utilizado los modelos del método GridSearchCV , con la intención de encontrar el mejor  modelo entrenado y sacar su métricas.
+Considero que he podido conseguir un buen modelo ,aunque me hubiese gustado disponer de otro tipo de informaciones adicionales también , tipo país de origen de cada propietario , ventas realizadas de cada modelo de coche en cada pais y así hacer algunas comparaciones más .

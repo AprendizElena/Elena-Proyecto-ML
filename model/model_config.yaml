@@ -1,0 +1,18 @@
+def plot_predictions(y_test, predictions, model_name):
+    plt.figure(figsize=(10, 6))
+    plt.scatter(y_test, predictions, alpha=0.3)
+    plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], color="blue", linestyle='--')
+    plt.xlabel("Actual Values")
+    plt.ylabel("Predicted Values")
+    plt.title(f'{model_name}: Actual vs Predicted Values')
+    plt.show()
+    for model_name, best_model in best_models.items():
+    evaluate_model(best_model, X_test, y_test, model_name)
+    Linear Regression - Test Mean Squared Error: 193932689.82
+Linear Regression - Test R^2 Score: -0.03
+Decision Tree Regressor - Test Mean Squared Error: 191915750.23
+Decision Tree Regressor - Test R^2 Score: -0.02
+Random Forest Regressor - Test Mean Squared Error: 189856672.18
+Random Forest Regressor - Test R^2 Score: -0.00
+K-Neighbors Regressor - Test Mean Squared Error: 210377341.86
+K-Neighbors Regressor - Test R^2 Score: -0.11

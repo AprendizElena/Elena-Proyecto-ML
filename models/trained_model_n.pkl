@@ -1,0 +1,13 @@
+import pickle
+#guardar el n1 entrenado 
+with open("linear_regression_model.predict(x_test).pkl","wb")as file:
+    pickle.dump(linear_regression_predictions,file)
+ #guardamos el n2 modelo entrenado
+with open ("decision_tree_regressor.predict(x_test).pkl","wb")as file:
+    pickle.dump(decision_tree_predictions,file)
+  #guardamos el n3 modelo entrenado
+with open ("random_forest_regressor.predict(x_test).pkl","wb")as file:
+    pickle.dump(random_forest_predictions,file)
+   #guardamos el n4 modelo entrenado
+with open("model.predict(X_test).pkl","wb")as file:
+    pickle.dump(model,file)      

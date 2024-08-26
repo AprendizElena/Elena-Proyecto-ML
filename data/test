@@ -1,0 +1,93 @@
+linear_regression_predictions = linear_regression_model.predict(X_test)
+ #calculamos las métricas de la regresión linear 
+mse_linear = mean_squared_error(y_test, linear_regression_predictions)
+r2_linear = r2_score(y_test, linear_regression_predictions)
+print("Linear Regression - Mean Squared Error: {:.2f}".format(mse_linear))
+print("Linear Regression - R^2 Score: {:.2f}".format(r2_linear))
+ Linear Regression - Mean Squared Error: 193932689.82
+Linear Regression - R^2 Score: -0.03
+#visualizamos los valores actuales con los valores de la predicción 
+ plt.figure(figsize=(10, 6))
+plt.scatter(y_test, linear_regression_predictions, alpha=0.3)
+plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], color="blue", linestyle='--')
+plt.xlabel("Actual Values")
+plt.ylabel("Predicted Values")
+plt.title("Linear Regression: valores actuales versus valores de la predict")
+plt.show()
+ decision_tree_predictions = decision_tree_regressor.predict(X_test)
+ #calculamos las métricas de la Decision Tree Regressor 
+mse_tree = mean_squared_error(y_test, decision_tree_predictions)
+r2_tree = r2_score(y_test, decision_tree_predictions)
+print("Decision Tree Regressor - Mean Squared Error: {:.2f}".format(mse_tree))
+print("Decision Tree Regressor - R^2 Score: {:.2f}".format(r2_tree))
+Decision Tree Regressor - Mean Squared Error: 363372995.17
+Decision Tree Regressor - R^2 Score: -0.92
+#visualización valorers actuales versus valores de la decision Tree predict 
+plt.figure(figsize=(10, 6))
+plt.scatter(y_test, decision_tree_predictions, alpha=0.3)
+plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], color="blue", linestyle='--')
+plt.xlabel("Actual Values")
+plt.ylabel("Predicted Values")
+plt.title("Decision Tree Regressor: valores actuales versus valores de la Decision Tree predict")
+plt.show()
+  random_forest_predictions = random_forest_regressor.predict(X_test)
+  #calculamos las métricas de Random Forest 
+mse_forest = mean_squared_error(y_test, random_forest_predictions)
+r2_forest = r2_score(y_test, random_forest_predictions)
+print("Random Forest Regressor - Mean Squared Error: {:.2f}".format(mse_forest))
+print("Random Forest Regressor - R^2 Score: {:.2f}".format(r2_forest))
+ Random Forest Regressor - Mean Squared Error: 195749193.95
+Random Forest Regressor - R^2 Score: -0.04
+ plt.figure(figsize=(10, 6))
+plt.scatter(y_test, random_forest_predictions, alpha=0.3)
+plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], color="blue", linestyle='--')
+plt.xlabel("Actual Values")
+plt.ylabel("Predicted Values")
+plt.title("Random Forest Regressor: datos actuales versus datos del Random Forest predict")
+plt.show()
+ #entrenamos los modelos con GrisSearchCV para elegir el mejor modelo
+best_models = {}
+for model_name, (model, param_grid) in models.items():
+    grid_search = GridSearchCV(model, param_grid, cv=5, scoring='r2', n_jobs=-1)
+    grid_search.fit(X_train, y_train)
+    best_models[model_name] = grid_search.best_estimator_
+    print(f"{model_name} - Best Parameters: {grid_search.best_params_}")
+    print(f"{model_name} - Best CV Score: {grid_search.best_score_:.2f}") 
+    Linear Regression - Best Parameters: {}
+Linear Regression - Best CV Score: -0.03
+Decision Tree Regressor - Best Parameters: {'max_depth': 10, 'min_samples_leaf': 1, 'min_samples_split': 20}
+Decision Tree Regressor - Best CV Score: -0.04
+Random Forest Regressor - Best Parameters: {'max_depth': 10, 'min_samples_leaf': 5, 'min_samples_split': 10, 'n_estimators': 50}
+Random Forest Regressor - Best CV Score: -0.01
+K-Neighbors Regressor - Best Parameters: {'n_neighbors': 9, 'weights': 'uniform'}
+K-Neighbors Regressor - Best CV Score: -0.10
+ #probamos el mejor modelo
+def evaluate_model(model, X_test, y_test, model_name):
+    predictions = model.predict(X_test)
+    mse = mean_squared_error(y_test, predictions)
+    r2 = r2_score(y_test, predictions)
+    print(f"{model_name} - Test Mean Squared Error: {mse:.2f}")
+    print(f"{model_name} - Test R^2 Score: {r2:.2f}")
+    plot_predictions(y_test, predictions, model_name)
+   #visualización de los valores actuales y del modelo predict 
+    def plot_predictions(y_test, predictions, model_name):
+    plt.figure(figsize=(10, 6))
+    plt.scatter(y_test, predictions, alpha=0.3)
+    plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], color="blue", linestyle='--')
+    plt.xlabel("Actual Values")
+    plt.ylabel("Predicted Values")
+    plt.title(f'{model_name}: Actual vs Predicted Values')
+    plt.show()
+      for model_name, best_model in best_models.items():
+    evaluate_model(best_model, X_test, y_test, model_name)
+      Linear Regression - Test Mean Squared Error: 193932689.82
+Linear Regression - Test R^2 Score: -0.03
+Decision Tree Regressor - Test Mean Squared Error: 191915750.23
+Decision Tree Regressor - Test R^2 Score: -0.02
+Random Forest Regressor - Test Mean Squared Error: 189856672.18
+K-Neighbors Regressor - Test Mean Squared Error: 210377341.86
+K-Neighbors Regressor - Test R^2 Score: -0.11
+Random Forest Regressor - Test R^2 Score: -0.00
+  
+
+  
